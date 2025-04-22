@@ -75,3 +75,29 @@ app.get("/Events" , async (req, res) => {
         res.status(500).json({error: "Failed to fetch the Events"})
     }
 })
+
+//function to get event by id's
+
+const eventById = async (eventId) => {
+    try{
+        const eventFoundById = await Event.findById(eventId)
+        return eventFoundById
+    }
+    catch(error){
+        console.log("error occured while finding the Event", error)
+    }
+}
+
+app.get("/events/:eventId", async (req , res) => {
+    try{
+        const eventFounded = await eventById(req.params.eventId)
+        if(eventFounded){
+            res.status(201).json(eventFounded)
+        } else {
+            res.status(404).json({error: "No event found."})
+        }
+    }
+    catch(error){
+        res.status(500).json({error: "Failed to fetch the event."})
+    }
+})
