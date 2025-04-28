@@ -93,7 +93,7 @@ app.get("/events/:eventId", async (req , res) => {
     try{
         const eventFounded = await eventById(req.params.eventId)
         if(eventFounded){
-            res.status(201).json(eventFounded)
+            res.status(200).json({message: "found event.", data: eventFounded});
         } else {
             res.status(404).json({error: "No event found."})
         }
