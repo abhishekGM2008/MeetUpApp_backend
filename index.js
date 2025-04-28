@@ -66,7 +66,7 @@ app.get("/Events" , async (req, res) => {
     try{
         const allEvents = await readAllEvents()
         if(allEvents.length > 0){
-            res.json(allEvents)
+            res.status(200).json({message: "All Events are Found.", eventData: allEvents})
         } else {
             res.status(404).json({error: "No Events are found.."})
         }
